@@ -1,6 +1,6 @@
 function App() {
   const onClick = () => {
-    fetch("https://serially-brawny-bluebird.cloudpub.ru/api/payment", {
+    fetch("https://paymentsexpress.onrender.com/api/payment", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
