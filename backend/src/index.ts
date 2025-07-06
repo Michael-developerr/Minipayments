@@ -3,12 +3,7 @@ import cors from "cors";
 
 import { ICreatePayment, YooCheckout } from "@a2seven/yoo-checkout";
 
-
-const database ={
-
-    
-}
-
+const database: any = {};
 
 const app = express();
 const PORT = process.env.PORT || 4001;
@@ -32,6 +27,7 @@ app.post("/api/payment", async (req: Request, res: Response) => {
     payment_method_data: {
       type: "bank_card", // тип банковскуая карта
     },
+    capture:true,
     confirmation: {
       type: "redirect",
       return_url: "https://github.com/Michael-developerr",
@@ -48,7 +44,9 @@ app.post("/api/payment", async (req: Request, res: Response) => {
 
       Date.now().toString()
     ); // тут мы можем указать вместо  Date.now().toString() //  V4 UUID.
+
     res.json({ payment });
+
     console.log(payment);
   } catch (error) {
     console.error(error);
@@ -56,6 +54,11 @@ app.post("/api/payment", async (req: Request, res: Response) => {
   }
 });
 
+app.post("/api/payment/notifications", async (req: Request, res: Response) => {
+  console.log(req.body);
+  database[req.body.id] = req.body;
+  res.json({ status: "ok" });
+});
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
