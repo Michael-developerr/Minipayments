@@ -1,8 +1,9 @@
+import dotenv from "dotenv";
+dotenv.config();
 import express, { Request, Response } from "express";
 import cors from "cors";
 
 import { ICreatePayment, YooCheckout } from "@a2seven/yoo-checkout";
-
 const database: any = {};
 
 const app = express();
@@ -14,8 +15,8 @@ app.use(express.json());
 //...............
 
 const YouKassa = new YooCheckout({
-  shopId: "1120024",
-  secretKey: "test_kUtBoheJcWDx9cq2AvE588rLUQVkeROgV28-49IEjrM",
+  shopId: process.env.YOOKASSA_SHOP_ID!,
+  secretKey: process.env.YOOKASSA_SECRET!,
 });
 
 app.post("/api/payment", async (req: Request, res: Response) => {
@@ -27,10 +28,10 @@ app.post("/api/payment", async (req: Request, res: Response) => {
     payment_method_data: {
       type: "bank_card", // тип банковскуая карта
     },
-    capture:true,
+    capture: true,
     confirmation: {
       type: "redirect",
-      return_url: "https://github.com/Michael-developerr",
+      return_url: "https://essentially-outgoing-collie.cloudpub.ru",
     },
     metadata: {
       orderId: req.body.orderId,
