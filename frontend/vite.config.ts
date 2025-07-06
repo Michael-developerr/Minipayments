@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     allowedHosts: [
-        'secondly-worthy-shrimp.cloudpub.ru'
+        'essentially-outgoing-collie.cloudpub.ru'
     ]
   }
 })
